@@ -40,7 +40,7 @@ cd obd-telemetry-emulator
     python -m venv venv
 
 -Activate venv
-    Powershell: 
+    Terminal: 
     venv\Scripts\Activate.ps1
 
 If it is blocked, run this ONCE as an admin in Powershell:
