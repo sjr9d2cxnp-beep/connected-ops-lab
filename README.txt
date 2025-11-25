@@ -28,11 +28,13 @@ What's in the repo
 
 Prerequisites
 -Python 3.10 installed
--VS Code installed
 -Terminal Access (Powershell/CMD)
 
--Open VSCode
--File -> Open Folder -> select telemetry-lab
+ Clone the repository
+bash
+git clone https://github.com/sjr9d2cxnp-beep/obd-telemetry-emulator.git
+cd obd-telemetry-emulator
+
 -Create virtual environment
     In terminal:
     python -m venv venv
