@@ -33,14 +33,14 @@ Prerequisites
  Clone the repository
 bash
 git clone https://github.com/sjr9d2cxnp-beep/obd-telemetry-emulator.git
+
+Enter the directory:
 cd obd-telemetry-emulator
 
--Create virtual environment
-    In terminal:
+-Create virtual environment in the directory:
     python -m venv venv
 
--Activate venv
-    Terminal: 
+-Activate venv 
     venv\Scripts\Activate.ps1
 
 If it is blocked, run this ONCE as an admin in Powershell:
@@ -49,27 +49,42 @@ Set-ExecutionPolicy -ExecutionPolicyRemoteSigned -Scope CurrentUser
 
 Activate again.
 
-Install dependencies:
+Install dependencies in that directory:
 
 pip install -r requirements.txt
 
 
-You need 3 terminal windows to run this:
+You will need 3 terminal windows to run this:
+
+For each new window you will need to run these commands FIRST:
+cd obd-telemetry-emulator
+venv\Scripts\Activate.ps1
+
 
 Terminal 1: Start api -> uvicorn api:app -reload
 Terminal 2: Run emulator -> python emulator.py
 Terminal 3: Run the dashboard -> streamlit run dashboard.py
 
 Verify its working by opening http://127.0.0.1:8000/telemetry
+
 You should see a growing list of JSON telemetry points.
+
+Once you run the streamlit command, it should take you to a browser window with the dashboard. 
 
 Dashboard should show latest row + RPM line graph
 
 Data is random demo data, so the RPM and corresponding graphs
 will look chaotic. 
 
-Next version will use realistic driving modes.
+Refresh the page to get new 
+data points.
 
+Once you are done, close out the terminal windows. Next open a new one and run this command:
+Remove-Item -Recurse -Force "C:\Users\drake\obd-telemetry-emulator"
+
+This will delete the cloned project from your computer.
+
+If there are any errors, contact me at drake@drakewildes.co and I will fix them.
 
 PLANNED:
 -GitHub repo and Loom demo walkthrough
