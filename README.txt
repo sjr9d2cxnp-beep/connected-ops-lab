@@ -22,7 +22,7 @@ What's in the repo
 -api.py (FastAPI app)
 -emulator.py (telemetry generator)
 -dashboard.py (Streamlit UI)
--JSON file
+-JSON file (sample output)
 -requirements.txt
 -README.txt
 
