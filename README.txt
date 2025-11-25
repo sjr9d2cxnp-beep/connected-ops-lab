@@ -61,7 +61,7 @@ cd obd-telemetry-emulator
 venv\Scripts\Activate.ps1
 
 
-Terminal 1: Start api -> uvicorn api:app -reload
+Terminal 1: Start api -> uvicorn api:app
 Terminal 2: Run emulator -> python emulator.py
 Terminal 3: Run the dashboard -> streamlit run dashboard.py
 
