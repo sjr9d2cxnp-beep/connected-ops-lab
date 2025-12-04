@@ -5,7 +5,6 @@ from typing import List
 
 app = FastAPI()
 
-# in-memory storage for MVP
 DATA: List[dict] = []
 
 class Telemetry(BaseModel):
@@ -18,11 +17,10 @@ class Telemetry(BaseModel):
 @app.post("/telemetry")
 def ingest(point: Telemetry):
     DATA.append(point.dict())
-    # keep last 300 points
     if len(DATA) > 300:
         DATA.pop(0)
     return {"status": "ok", "count": len(DATA)}
 
 @app.get("/telemetry")
 def read_latest():
-    return DATA[-50:]
+    return DATA[-300:]
