@@ -1,4 +1,6 @@
+# docker-compose.yml
 
+version: "3.9"
 
 services:
   api:
@@ -6,7 +8,6 @@ services:
     container_name: connected-ops-api
     ports:
       - "8000:8000"
-    command: uvicorn api:app --host 0.0.0.0 --port 8000
 
   dashboard:
     build: ./predictive-maint-dash
@@ -14,7 +15,7 @@ services:
     ports:
       - "8501:8501"
     environment:
+      # This is what app.py in the dashboard will read
       API_URL: http://api:8000/telemetry
     depends_on:
       - api
-    command: streamlit run app.py --server.address=0.0.0.0
