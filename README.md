@@ -94,6 +94,7 @@ From the repo root:
 
 ```sh
 docker-compose up --build
+```
 
 Then visit:
 
