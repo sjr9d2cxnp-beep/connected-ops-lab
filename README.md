@@ -26,22 +26,22 @@ This setup mirrors real Connected Operations platforms (Samsara, Geotab, OEM tel
 
 ## 🧩 Architecture
 
-connected-ops-lab/
-│
-├── telemetry-emulator/              # Synthetic OBD-II signal generator + API
-│   ├── emulator.py                  # Generates streaming RPM/temp/vibration/etc.
-│   ├── telemetry_emulator.json      # Signal config + drift/anomaly patterns
-│   ├── api.py                       # FastAPI service exposing /telemetry
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── predictive-maint-dash/           # Streamlit dashboard for asset insights
-│   ├── app.py                       # Visualization + anomaly scoring
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── docker-compose.yml               # Orchestrates both services with one command
-└── README.md                        # You're reading it
+## 🧩 Architecture
+
+    connected-ops-lab/
+        telemetry-emulator/
+            emulator.py
+            telemetry_emulator.json
+            api.py
+            requirements.txt
+            Dockerfile
+        predictive-maint-dash/
+            app.py
+            requirements.txt
+            Dockerfile
+        docker-compose.yml
+        README.md
+
 
 
 ---
