@@ -26,23 +26,20 @@ This setup mirrors real Connected Operations platforms (Samsara, Geotab, OEM tel
 
 ## 🧩 Architecture
 
-connected-ops-lab/
-│
-├── telemetry-lab/ # Emulator + FastAPI service
-│ ├── api.py
-│ ├── emulator.py
-│ ├── telemetry_emulator.json
-│ ├── Dockerfile
-│ └── README.md
-│
-├── predictive-maint-dash/ # Streamlit dashboard
-│ ├── app.py
-│ ├── requirements.txt
-│ ├── Dockerfile
-│ └── README.md
-│
-├── docker-compose.yml # Launches both services
-└── README.md # (this file)
+connected-ops-lab/ telemetry-lab/ # Emulator + FastAPI service
+   api.py
+   emulator.py
+   telemetry_emulator.json
+   Dockerfile
+   README.md
+
+predictive-maint-dash/ # Streamlit dashboard
+   app.py
+   requirements.txt
+   Dockerfile
+   README.md
+docker-compose.yml # Launches both services
+README.md # (this file)
 
 ---
 
