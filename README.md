@@ -24,7 +24,24 @@ This setup mirrors real Connected Operations platforms (Samsara, Geotab, OEM tel
 
 ---
 
-## 🧩 Architecture
+## 🧠 Business Value
+
+### 1. From Telemetry → Actionable Maintenance Insight
+- Converts raw OBD-style signals into risk scores, trends, and priorities.
+- Shows how operators reduce downtime, avoid failures, and plan maintenance smarter.
+- Demonstrates SE-level ability to translate data into operational decisions.
+
+### 2. Clear, Reproducible Connected Ops Architecture
+- Emulator → FastAPI → Dashboard pipeline mirrors real Connected Ops platforms.
+- Shows comfort with APIs, data ingestion, anomaly logic, and visualization.
+- Runs end-to-end via `docker-compose up`, proving practical SE demo skills.
+
+### 3. Mid-Level Sales Engineering Readiness Signal
+- Communicates technical understanding without jargon.
+- Frames problems in customer language: efficiency, safety, uptime, cost.
+- Provides a polished, repeatable demo that supports AEs and accelerates deals.
+
+---
 
 ## 🧩 Architecture
 
@@ -41,8 +58,6 @@ This setup mirrors real Connected Operations platforms (Samsara, Geotab, OEM tel
             Dockerfile
         docker-compose.yml
         README.md
-
-
 
 ---
 
