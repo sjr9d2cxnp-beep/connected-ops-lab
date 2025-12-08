@@ -101,6 +101,20 @@ This is exactly how a Sales Engineer walks a customer through proof-of-value.
 
 ---
 
+## Video Demonstration of the Lab
+
+Here is a short 2 minute video where I explain:
+
+-how the lab simulates real telematics signals
+-how ingestion + validation enforce reliability
+-how real-time dashboards support operator decisions
+
+Loom Demo: https://www.loom.com/share/41fae1d6abed437bb9311088c2a93c6c
+
+This mirros how SEs guide customers through signal -> clarity -> action conversations
+---
+
+
 ## 🛠️ How to Run (One Command)
 
 Make sure Docker Desktop is running.
