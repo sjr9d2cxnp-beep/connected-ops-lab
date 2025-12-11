@@ -87,6 +87,7 @@ This project is intentionally built to reflect real pre-sales workflows:
             |                                                                   |
             +---------------- Seed Profile (telemetry_emulator.json) -----------+
 
+```
 ---
 ## 📡 Example Telemetry Payload (What the API Expects)
 
@@ -103,5 +104,5 @@ Every second, the emulator sends a JSON payload like this to `POST /telemetry`:
   "vibration_score": 1.2,
   "engine_hours": 123.45
 }
-
+```
 ---
