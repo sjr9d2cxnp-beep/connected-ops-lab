@@ -1,136 +1,107 @@
 # Connected Ops Lab  
 ### Real-Time Telemetry → FastAPI Ingestion → Predictive Maintenance Dashboard  
-*A fully containerized proof-of-concept demonstrating how a Sales Engineer turns machine data into operational clarity.*
+*A containerized, end-to-end demo showing how a Sales Engineer turns raw machine data into operational clarity.*
 
 ---
 
 ## 🚀 Overview
 
-Connected Ops Lab is a small, end-to-end IoT/telematics system:
+**Connected Ops Lab** is a lightweight but realistic IoT/telematics workflow that demonstrates how modern fleet and equipment operations transform raw telemetry into actionable decisions.
 
-1. **Telemetry Emulator (OBD-II style)**  
-   Generates realistic vehicle signals (RPM, coolant temp, intake temp, vibration, engine hours).
+It simulates the core loop used across platforms like Samsara, Motive, Netradyne, and OEM diagnostic stacks:
 
-2. **FastAPI Ingestion Service**  
-   Receives streaming telemetry at `/telemetry`, stores recent history, and exposes it for the dashboard.
+**Telemetry → Validation → Signal → Risk → Insight → Business Value**
 
-3. **Predictive Maintenance Dashboard (Streamlit)**  
-   Scores assets on maintenance risk, highlights anomalies, and displays intuitive trend visualizations.
-
-All components run together with a single command via Docker Compose.
-
-This setup mirrors real Connected Operations platforms (Samsara, Geotab, OEM telematics), but in a recruiter-friendly, self-contained demo.
-
+The lab consists of four components:
 
 ---
 
-## 🧠 Business Value
+### 1. Telemetry Emulator (OBD-II Style)  
 
-### 1. From Telemetry → Actionable Maintenance Insight
-- Converts raw OBD-style signals into risk scores, trends, and priorities.
-- Shows how operators reduce downtime, avoid failures, and plan maintenance smarter.
-- Demonstrates SE-level ability to translate data into operational decisions.
+A Python process that streams realistic engine and sensor signals every second:
 
-### 2. Clear, Reproducible Connected Ops Architecture
-- Emulator → FastAPI → Dashboard pipeline mirrors real Connected Ops platforms.
-- Shows comfort with APIs, data ingestion, anomaly logic, and visualization.
-- Runs end-to-end via `docker-compose up`, proving practical SE demo skills.
-
-### 3. Mid-Level Sales Engineering Readiness Signal
-- Communicates technical understanding without jargon.
-- Frames problems in customer language: efficiency, safety, uptime, cost.
-- Provides a polished, repeatable demo that supports AEs and accelerates deals.
-
----
-
-## 🧩 Architecture
-
-    connected-ops-lab/
-        telemetry-emulator/
-            emulator.py
-            telemetry_emulator.json
-            api.py
-            requirements.txt
-            Dockerfile
-        predictive-maint-dash/
-            app.py
-            requirements.txt
-            Dockerfile
-        docker-compose.yml
-        README.md
-
----
-
-## 📦 What This Lab Demonstrates
-
-### **1. Streaming Telemetry (OBD-II style)**  
-- RPM (± 1800–2100 during cruise)  
-- Coolant temp around 195°F with noise and drift  
-- Intake air temperature tied to load  
+- RPM  
+- Coolant temperature  
+- Intake air temperature  
+- Speed  
 - Vibration score  
-- Engine hours  
+- Engine hours (with natural drift)
 
-Includes:  
-- realistic cruising behavior  
-- anomaly patterns (thermal spikes, creeping vibration trends)
+The emulator loads a **seed profile** from `telemetry_emulator.json` and evolves it over time, creating believable operational behavior.
 
 ---
 
-### **2. Real-Time Data Pipeline**
-The emulator pushes JSON packets to FastAPI → FastAPI serves them to the dashboard.
+### 2. FastAPI Ingestion Service  
 
-This shows your ability to:
-- structure time-series signals  
-- design APIs  
-- handle ingestion and refresh  
-- link multiple services into a coherent flow  
+A lightweight ingestion layer that:
 
----
+- Receives streaming telemetry via `POST /telemetry`  
+- Stores a rolling window of recent samples in memory  
+- Exposes the stream for dashboards at `GET /telemetry`  
+- Supports **push-button anomaly simulation** via `POST /simulate_anomaly`
 
-### **3. Predictive Maintenance Logic**
-The dashboard calculates:
-- risk bands (Low / Medium / High)  
-- rule-based thresholds (coolant, intake air, vibration)  
-- trend-based rolling windows  
-- prioritized maintenance list  
-
-It visually explains:  
-> “Here’s why this unit is at risk — and what signal caused it.”
-
-This is exactly how a Sales Engineer walks a customer through proof-of-value.
+This reflects how real IoT gateways and cloud ingestion services collect and route machine signals.
 
 ---
 
-## Video Demonstration of the Lab
+### 3. Predictive Maintenance Dashboard (Streamlit — `app.py`)  
 
-Here is a short 2 minute video where I explain:
+A production-style SE demo that includes:
 
--how the lab simulates real telematics signals
--how ingestion + validation enforce reliability
--how real-time dashboards support operator decisions
+- **Validation Layer** – flags malformed or out-of-range signals  
+- **Health & Risk Scoring** – converts telemetry into a risk band  
+- **Business Value Panel** – estimates downtime exposure and cost impact  
+- **Demo Controls** – simulate coolant overheat, vibration spikes, or speed anomalies  
+- **Fleet & Per-Unit Views** – drill into operational context  
 
-Loom Demo: https://www.loom.com/share/41fae1d6abed437bb9311088c2a93c6c
+The dashboard auto-refreshes every few seconds so charts and metrics move continuously in the background, giving a “live control room” feel.
 
-This mirros how SEs guide customers through signal -> clarity -> action conversations
 ---
 
+### 4. MVP Debug Dashboard (`dashboard.py`)  
 
-## 🛠️ How to Run (One Command)
+A slim, fast-loading viewer for development and quick inspection.
 
-Make sure Docker Desktop is running.
+---
 
-From the repo root:
+## 🧠 What This Demonstrates (Sales Engineering POV)
 
-```sh
-docker-compose up --build
-```
+This project is intentionally built to reflect real pre-sales workflows:
 
-Then visit:
+- **Data realism** – telemetry is noisy and drifts over time.  
+- **Validation as a first-class concept** – data quality is visible and explainable.  
+- **Repeatable demo scenarios** – `/simulate_anomaly` provides predictable spikes.  
+- **Clear business value** – the Business Impact panel ties engineering risk → downtime → dollar impact.  
+- **Realistic operational narrative** – mirrors how connected-operations tools surface value in fleet, heavy equipment, and manufacturing environments.
 
-Dashboard: http://localhost:8501
+---
 
-API Stream: http://localhost:8000/telemetry
+## 🧱 Architecture
 
-To stop everything:
-CTRL + C
-docker-compose down
+```text
++--------------------------+       +-----------------------------+       +-------------------------------+
+|  Telemetry Emulator      | ----> |  FastAPI Ingestion Service | ----> |  Streamlit Dashboards         |
+|  (emulator.py)           | POST  |  /telemetry, /simulate_*   | GET   |  app.py / dashboard.py        |
++--------------------------+       +-----------------------------+       +-------------------------------+
+            ^                                                                   |
+            |                                                                   |
+            +---------------- Seed Profile (telemetry_emulator.json) -----------+
+
+---
+## 📡 Example Telemetry Payload (What the API Expects)
+
+Every second, the emulator sends a JSON payload like this to `POST /telemetry`:
+
+```jsonA
+{
+  "ts": "2025-01-01T12:34:56.789Z",
+  "vehicle_id": "corolla_2019",
+  "coolant_temp_f": 195.0,
+  "intake_air_temp_f": 70.0,
+  "engine_rpm": 2100,
+  "speed_mph": 65.0,
+  "vibration_score": 1.2,
+  "engine_hours": 123.45
+}
+
+---

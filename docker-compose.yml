@@ -1,21 +1,37 @@
-# docker-compose.yml
-
 version: "3.9"
 
 services:
   api:
-    build: ./telemetry-lab
+    build: .
     container_name: connected-ops-api
+    command: ["uvicorn", "api.api:app", "--host", "0.0.0.0", "--port", "8000"]
     ports:
       - "8000:8000"
 
-  dashboard:
-    build: ./predictive-maint-dash
-    container_name: connected-ops-dashboard
-    ports:
-      - "8501:8501"
+  emulator:
+    build: .
+    container_name: connected-ops-emulator
+    command: ["python", "emulator/emulator.py"]
     environment:
-      # This is what app.py in the dashboard will read
       API_URL: http://api:8000/telemetry
+      VEHICLE_ID: corolla_2019
+      BASE_PAYLOAD_PATH: emulator/telemetry_emulator.json
     depends_on:
       - api
+
+  dashboard:
+    build: .
+    container_name: connected-ops-dashboard
+    command: [
+      "streamlit", "run", "dashboard/app.py",
+      "--server.port=8501",
+      "--server.address=0.0.0.0"
+    ]
+    environment:
+      API_URL: http://api:8000/telemetry
+      SIM_API_URL: http://api:8000/simulate_anomaly
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+      - emulator

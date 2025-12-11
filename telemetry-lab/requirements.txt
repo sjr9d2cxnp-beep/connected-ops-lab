@@ -1,6 +1,0 @@
-FastAPI
-uvicorn
-pydantic
-streamlit
-requests
-plotly
