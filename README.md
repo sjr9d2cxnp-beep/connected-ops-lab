@@ -8,11 +8,11 @@ docker-compose up –build
 •  API: http://localhost:8000
 •  Dashboard: http://localhost:8501
 ## What it shows
-•  Telemetry stream that drifts over time
-•  Validation of incoming signals
-•  Simple risk band
-•  Basic view of operational impact
-•  Button to simulate an anomaly
+- Telemetry stream that drifts over time
+- Validation of incoming signals
+- Simple risk band
+- Basic view of operational impact
+- Button to simulate an anomaly
 ## Notes
 This is a personal demo. It is not production software and does not use real fleet data.
 ## Architecture
