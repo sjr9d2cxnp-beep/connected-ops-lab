@@ -685,11 +685,18 @@ def main() -> None:
             height=260,
         )
 
-    st.markdown("#### Vibration and raw samples")
+        st.markdown("#### Vibration and raw samples")
     st.line_chart(
         unit_df.set_index("timestamp")[["vibration_score"]],
         height=220,
     )
+
+    st.markdown("#### Recent")
+    st.dataframe(
+        unit_df[["timestamp", "coolant_temp_f", "vibration_score", "risk_band"]].tail(12),
+        hide_index=True,
+    )
+
     st.dataframe(
         unit_df[
             [
@@ -707,7 +714,6 @@ def main() -> None:
         ].tail(40),
         hide_index=True,
     )
-
     render_anomaly_narrative(scenario_type)
 
     st.caption(
