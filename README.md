@@ -5,8 +5,8 @@ Personal model of a connected-ops loop. Simulated data, in-memory, single unit.
 ```bash
 docker-compose up –build
 ```
-•  API: http://localhost:8000
-•  Dashboard: http://localhost:8501
+- API: http://localhost:8000
+- Dashboard: http://localhost:8501
 ## What it shows
 - Telemetry stream that drifts over time
 - Validation of incoming signals
